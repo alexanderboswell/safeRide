@@ -2,20 +2,24 @@
 //  ContentView.swift
 //  safeRide Watch App
 //
-//  Created by Alexander Boswell on 2/15/23.
+//  Created by Alexander Boswell on 2/18/23.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+	
+	@State private var selectedTab = 1
+	
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+		TabView(selection: $selectedTab) {
+			SettingsView()
+				.tag(0)
+			ActivityView()
+				.tag(1)
+			ActionsView()
+				.tag(2)
+		}
     }
 }
 

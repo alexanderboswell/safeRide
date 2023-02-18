@@ -7,9 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3A530DF29A0AF8C006760D1 /* SystemAudioClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530DE29A0AF8C006760D1 /* SystemAudioClassifier.swift */; };
+		F3A530E129A0AF94006760D1 /* ClassifySoundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E029A0AF94006760D1 /* ClassifySoundApp.swift */; };
+		F3A530E929A0AF9F006760D1 /* SoundIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E329A0AF9F006760D1 /* SoundIdentifier.swift */; };
+		F3A530EA29A0AF9F006760D1 /* SetupMonitoredSoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E429A0AF9F006760D1 /* SetupMonitoredSoundsView.swift */; };
+		F3A530EB29A0AF9F006760D1 /* DetectSoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E529A0AF9F006760D1 /* DetectSoundsView.swift */; };
+		F3A530EC29A0AF9F006760D1 /* DetectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E629A0AF9F006760D1 /* DetectionState.swift */; };
+		F3A530ED29A0AF9F006760D1 /* ClassificationResultsSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E729A0AF9F006760D1 /* ClassificationResultsSubject.swift */; };
+		F3A530EE29A0AF9F006760D1 /* ContentView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E829A0AF9F006760D1 /* ContentView3.swift */; };
+		F3B490C429A1853E003D33A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B490C329A1853E003D33A0 /* ContentView.swift */; };
+		F3B490C629A1868E003D33A0 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B490C529A1868E003D33A0 /* ActivityView.swift */; };
+		F3B490C829A18E13003D33A0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B490C729A18E13003D33A0 /* AppConfiguration.swift */; };
+		F3B490CA29A18F4D003D33A0 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B490C929A18F4D003D33A0 /* ActionsView.swift */; };
+		F3B490CC29A19578003D33A0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B490CB29A19578003D33A0 /* SettingsView.swift */; };
+		F3B490CE29A19990003D33A0 /* ClassifierListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B490CD29A19990003D33A0 /* ClassifierListView.swift */; };
 		F3F21D90299DE18400EF838A /* safeRide Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F3F21D8F299DE18400EF838A /* safeRide Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F3F21D95299DE18400EF838A /* SafeRideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F21D94299DE18400EF838A /* SafeRideApp.swift */; };
-		F3F21D97299DE18400EF838A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F21D96299DE18400EF838A /* ContentView.swift */; };
 		F3F21D99299DE18600EF838A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3F21D98299DE18600EF838A /* Assets.xcassets */; };
 		F3F21D9C299DE18600EF838A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3F21D9B299DE18600EF838A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -39,10 +52,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F3A530DE29A0AF8C006760D1 /* SystemAudioClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioClassifier.swift; sourceTree = "<group>"; };
+		F3A530E029A0AF94006760D1 /* ClassifySoundApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifySoundApp.swift; sourceTree = "<group>"; };
+		F3A530E329A0AF9F006760D1 /* SoundIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundIdentifier.swift; sourceTree = "<group>"; };
+		F3A530E429A0AF9F006760D1 /* SetupMonitoredSoundsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupMonitoredSoundsView.swift; sourceTree = "<group>"; };
+		F3A530E529A0AF9F006760D1 /* DetectSoundsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectSoundsView.swift; sourceTree = "<group>"; };
+		F3A530E629A0AF9F006760D1 /* DetectionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectionState.swift; sourceTree = "<group>"; };
+		F3A530E729A0AF9F006760D1 /* ClassificationResultsSubject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassificationResultsSubject.swift; sourceTree = "<group>"; };
+		F3A530E829A0AF9F006760D1 /* ContentView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView3.swift; sourceTree = "<group>"; };
+		F3B490C329A1853E003D33A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F3B490C529A1868E003D33A0 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		F3B490C729A18E13003D33A0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		F3B490C929A18F4D003D33A0 /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
+		F3B490CB29A19578003D33A0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F3B490CD29A19990003D33A0 /* ClassifierListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifierListView.swift; sourceTree = "<group>"; };
 		F3F21D89299DE18400EF838A /* safeRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = safeRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F21D8F299DE18400EF838A /* safeRide Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safeRide Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F21D94299DE18400EF838A /* SafeRideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeRideApp.swift; sourceTree = "<group>"; };
-		F3F21D96299DE18400EF838A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F3F21D98299DE18600EF838A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3F21D9B299DE18600EF838A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +84,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3A530E229A0AF9F006760D1 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				F3A530DE29A0AF8C006760D1 /* SystemAudioClassifier.swift */,
+				F3A530E329A0AF9F006760D1 /* SoundIdentifier.swift */,
+				F3A530E429A0AF9F006760D1 /* SetupMonitoredSoundsView.swift */,
+				F3A530E529A0AF9F006760D1 /* DetectSoundsView.swift */,
+				F3A530E629A0AF9F006760D1 /* DetectionState.swift */,
+				F3A530E729A0AF9F006760D1 /* ClassificationResultsSubject.swift */,
+				F3A530E829A0AF9F006760D1 /* ContentView3.swift */,
+				F3B490C729A18E13003D33A0 /* AppConfiguration.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		F3B490C229A184FB003D33A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F3B490C329A1853E003D33A0 /* ContentView.swift */,
+				F3B490C529A1868E003D33A0 /* ActivityView.swift */,
+				F3B490C929A18F4D003D33A0 /* ActionsView.swift */,
+				F3B490CB29A19578003D33A0 /* SettingsView.swift */,
+				F3B490CD29A19990003D33A0 /* ClassifierListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F3F21D82299DE18400EF838A = {
 			isa = PBXGroup;
 			children = (
@@ -78,8 +131,10 @@
 		F3F21D93299DE18400EF838A /* safeRide Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				F3B490C229A184FB003D33A0 /* Views */,
 				F3F21D94299DE18400EF838A /* SafeRideApp.swift */,
-				F3F21D96299DE18400EF838A /* ContentView.swift */,
+				F3A530E029A0AF94006760D1 /* ClassifySoundApp.swift */,
+				F3A530E229A0AF9F006760D1 /* Support */,
 				F3F21D98299DE18600EF838A /* Assets.xcassets */,
 				F3F21D9A299DE18600EF838A /* Preview Content */,
 			);
@@ -192,8 +247,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3F21D97299DE18400EF838A /* ContentView.swift in Sources */,
+				F3B490C629A1868E003D33A0 /* ActivityView.swift in Sources */,
+				F3A530EB29A0AF9F006760D1 /* DetectSoundsView.swift in Sources */,
+				F3B490CE29A19990003D33A0 /* ClassifierListView.swift in Sources */,
+				F3A530ED29A0AF9F006760D1 /* ClassificationResultsSubject.swift in Sources */,
+				F3A530E129A0AF94006760D1 /* ClassifySoundApp.swift in Sources */,
+				F3A530EA29A0AF9F006760D1 /* SetupMonitoredSoundsView.swift in Sources */,
+				F3A530E929A0AF9F006760D1 /* SoundIdentifier.swift in Sources */,
+				F3B490C829A18E13003D33A0 /* AppConfiguration.swift in Sources */,
+				F3B490CC29A19578003D33A0 /* SettingsView.swift in Sources */,
+				F3A530EE29A0AF9F006760D1 /* ContentView3.swift in Sources */,
+				F3B490C429A1853E003D33A0 /* ContentView.swift in Sources */,
 				F3F21D95299DE18400EF838A /* SafeRideApp.swift in Sources */,
+				F3A530DF29A0AF8C006760D1 /* SystemAudioClassifier.swift in Sources */,
+				F3A530EC29A0AF9F006760D1 /* DetectionState.swift in Sources */,
+				F3B490CA29A18F4D003D33A0 /* ActionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +397,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = safeRide;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This application would like access to the microphone to detect and display sounds occurring in the environment.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -359,6 +428,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = safeRide;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This application would like access to the microphone to detect and display sounds occurring in the environment.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
