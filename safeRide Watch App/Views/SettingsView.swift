@@ -60,6 +60,9 @@ struct SettingsView: View {
 						appState.restartDetection(config: appConfig)
 					})
 			}
+			Section("Licenses") {
+				
+			}
 		}
     }
 }

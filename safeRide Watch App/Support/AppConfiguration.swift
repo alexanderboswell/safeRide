@@ -39,7 +39,7 @@ struct AppConfiguration {
 	/// - Returns: A set of identifiable sounds, including the associated labels that sound
 	///   classification emits, and names suitable for displaying to the user.
 	static func listAllSoundIdentifiers() throws -> Set<SoundIdentifier> {
-		let labels: Set<String> = ["bicycle_bell"]
+		let labels: Set<String> = ["bicycle_bell", "yell", "car_horn", "emergency_vehicle","bicycle", "car_passing_by", "speech", "motorcycle", "bus", "police_siren"]
 		return Set<SoundIdentifier>(labels.map {
 			SoundIdentifier(labelName: $0)
 		})
