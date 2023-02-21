@@ -81,8 +81,17 @@ class AppState: ObservableObject {
 	///
 	/// - Parameter config: A configuration that provides information for performing sound detection.
 	func restartDetection(config: AppConfiguration) {
+		stopDetection(config: config)
+		startDetection(config: config)
+	}
+	
+	func stopDetection(config: AppConfiguration) {
+		soundDetectionIsRunning = false
 		SystemAudioClassifier.singleton.stopSoundClassification()
-		
+		detectionCancellable?.cancel()
+	}
+	
+	func startDetection(config: AppConfiguration) {
 		let classificationSubject = PassthroughSubject<SNClassificationResult, Error>()
 		
 		detectionCancellable =

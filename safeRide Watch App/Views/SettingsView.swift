@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct SettingsView: View {
-	/// Indicates whether to display the setup workflow.
-	@State var showSetup = true
-	
-	/// A configuration for managing the characteristics of a sound classification task.
-	@State var appConfig = AppConfiguration()
+//	/// Indicates whether to display the setup workflow.
+//	@State var showSetup = true
 	
 	/// The runtime state that contains information about the strength of the detected sounds.
-	@StateObject var appState = AppState()
+	@ObservedObject var appState: AppState
+	
+	/// The configuration that dictates aspects of sound classification, as well as aspects of the visualization.
+	@Binding var appConfig: AppConfiguration
 	
 //	var body: some View {
 //		ZStack {
@@ -56,7 +56,6 @@ struct SettingsView: View {
 					querySoundOptions: { return try AppConfiguration.listAllSoundIdentifiers() },
 					selectedSounds: $appConfig.monitoredSounds,
 					doneAction: {
-						showSetup = false
 						appState.restartDetection(config: appConfig)
 					})
 			}
@@ -67,8 +66,8 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
+//struct SettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsView()
+//    }
+//}

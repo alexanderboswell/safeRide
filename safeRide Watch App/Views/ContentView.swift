@@ -9,16 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
 	
+	/// A configuration for managing the characteristics of a sound classification task.
+	@State var appConfig = AppConfiguration()
+	
+	/// The runtime state that contains information about the strength of the detected sounds.
+	@StateObject var appState = AppState()
+	
 	@State private var selectedTab = 1
 	
     var body: some View {
 		TabView(selection: $selectedTab) {
-			SettingsView()
-				.tag(0)
-			ActivityView()
+			if appState.soundDetectionIsRunning {
+				ActionsView(appState: appState, appConfig: $appConfig)
+					.tag(0)
+			} else {
+				SettingsView(appState: appState, appConfig: $appConfig)
+					.tag(0)
+			}
+			ActivityView(state: appState, config: $appConfig)
 				.tag(1)
-			ActionsView()
-				.tag(2)
+
 		}
     }
 }
