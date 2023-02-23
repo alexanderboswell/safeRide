@@ -7,6 +7,12 @@
 import Combine
 import SoundAnalysis
 
+enum SoundDetectionState {
+	case running
+	case paused
+	case stopped
+}
+
 /// Contains customizable settings that control app behavior.
 struct AppConfiguration {
 	/// Indicates the amount of audio, in seconds, that informs a prediction.
@@ -21,7 +27,7 @@ struct AppConfiguration {
 	var overlapFactor = Double(0.9)
 	
 	/// A list of sounds to identify from system audio input.
-	var monitoredSounds = Set<SoundIdentifier>()
+	var monitoredSounds: Set<SoundIdentifier> = [SoundIdentifier(labelName: "bicycle_bell")]
 	
 	/// Retrieves a list of the sounds the system can identify.
 	///
@@ -73,7 +79,7 @@ class AppState: ObservableObject {
 	/// When `false,` the sound classification has ended for some reason. This could be due to an error
 	/// emitted from Sound Analysis, or due to an interruption in the recorded audio. The app needs to prompt
 	/// the user to restart classification when `false.`
-	@Published var soundDetectionIsRunning: Bool = false
+	@Published var soundDetectionState: SoundDetectionState = .stopped
 	
 	/// Begins detecting sounds according to the configuration you specify.
 	///
@@ -85,8 +91,14 @@ class AppState: ObservableObject {
 		startDetection(config: config)
 	}
 	
+	func pauseDetection(config: AppConfiguration) {
+		soundDetectionState = .paused
+		SystemAudioClassifier.singleton.stopSoundClassification()
+		detectionCancellable?.cancel()
+	}
+
 	func stopDetection(config: AppConfiguration) {
-		soundDetectionIsRunning = false
+		soundDetectionState = .stopped
 		SystemAudioClassifier.singleton.stopSoundClassification()
 		detectionCancellable?.cancel()
 	}
@@ -97,7 +109,7 @@ class AppState: ObservableObject {
 		detectionCancellable =
 		classificationSubject
 			.receive(on: DispatchQueue.main)
-			.sink(receiveCompletion: { _ in self.soundDetectionIsRunning = false },
+			.sink(receiveCompletion: { _ in self.soundDetectionState = .stopped },
 				  receiveValue: {
 				self.detectionStates = AppState.advanceDetectionStates(self.detectionStates, givenClassificationResult: $0)
 			})
@@ -111,7 +123,7 @@ class AppState: ObservableObject {
 									   absenceMeasurementsToEndDetection: 30))
 			}
 		
-		soundDetectionIsRunning = true
+		soundDetectionState = .running
 		appConfig = config
 		SystemAudioClassifier.singleton.startSoundClassification(
 			subject: classificationSubject,

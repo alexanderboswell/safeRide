@@ -19,7 +19,7 @@ struct ContentView: View {
 	
     var body: some View {
 		TabView(selection: $selectedTab) {
-			if appState.soundDetectionIsRunning {
+			if !(appState.soundDetectionState == .stopped) {
 				ActionsView(appState: appState, appConfig: $appConfig)
 					.tag(0)
 			} else {
@@ -29,6 +29,11 @@ struct ContentView: View {
 			ActivityView(state: appState, config: $appConfig)
 				.tag(1)
 
+		}
+		.onChange(of: appState.soundDetectionState) { newValue in
+			if newValue == .stopped {
+				selectedTab = 1
+			}
 		}
     }
 }

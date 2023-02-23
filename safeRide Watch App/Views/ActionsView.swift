@@ -15,6 +15,8 @@ struct ActionsView: View {
 	/// The configuration that dictates aspects of sound classification, as well as aspects of the visualization.
 	@Binding var appConfig: AppConfiguration
 	
+	@State private var showSettingsView = false
+
     var body: some View {
 		Grid {
 			GridRow {
@@ -22,28 +24,27 @@ struct ActionsView: View {
 					appState.stopDetection(config: appConfig)
 				}
 				Spacer()
-				if appState.soundDetectionIsRunning {
+				if appState.soundDetectionState == .running {
 					ActionView(icon: Image("pause"), backgroundColor: .blue, title: "Pause") {
-						appState.stopDetection(config: appConfig)
+						appState.pauseDetection(config: appConfig)
 					}
-				} else {
+				} else if appState.soundDetectionState == .paused {
 					ActionView(icon: Image("play"), backgroundColor: .green, title: "Resume") {
-						//						appState.restartDetection(config: appConfig)
 						appState.startDetection(config: appConfig)
 					}
 				}
 			}
 			Spacer()
 			GridRow {
-//				ActionView(icon: Image("raindrops"), backgroundColor: .blue, title: "Lock") {
-//					WKInterfaceDevice.current().enableWaterLock()
-//				}
-//				Spacer()
-				ActionView(icon: Image("gear"), backgroundColor: .blue, title: "Settings") {
-					
+				ActionView(icon: Image("gear"), backgroundColor: .gray, title: "Settings") {
+					showSettingsView = true
+
 				}
 				Spacer()
 			}
+		}
+		.sheet(isPresented: $showSettingsView) {
+			SettingsView(appState: appState, appConfig: $appConfig)
 		}
     }
 }
@@ -60,7 +61,9 @@ struct ActionView: View {
 				Circle()
 					.foregroundColor(backgroundColor)
 				icon
+					.renderingMode(.template)
 					.resizable()
+					.foregroundColor(.white)
 					.padding()
 		
 			}
