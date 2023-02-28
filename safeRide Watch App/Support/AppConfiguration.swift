@@ -6,12 +6,77 @@
 //
 import Combine
 import SoundAnalysis
+import SwiftUI
 
 enum SoundDetectionState {
 	case running
 	case paused
 	case stopped
 }
+
+enum Sound: String, CaseIterable {
+	case bicycle = "bicycle"
+	case bicycleBell = "bicycle_bell"
+	case bus = "bus"
+	case carHorn = "car_horn"
+	case carPassingBy = "car_passing_by"
+	case emergencyVehicle = "emergency_vehicle"
+	case motorcycle = "motorcycle"
+	case policeSiren = "police_siren"
+	case speech = "speech"
+	case yell = "yell"
+	
+	var icon: Image {
+		switch self {
+			case .bicycle:
+				return Image("bicycle")
+			case .bicycleBell:
+				return Image("bell")
+			case .bus:
+				return Image("bus")
+			case .carHorn:
+				return Image("car")
+			case .carPassingBy:
+				return Image("carPassingBy")
+			case .emergencyVehicle:
+				return Image("emergencyVehicle")
+			case .motorcycle:
+				return Image("motorcycle")
+			case .policeSiren:
+				return Image("policeSiren")
+			case .speech:
+				return Image("speech")
+			case .yell:
+				return Image("yell")
+		}
+	}
+	
+	var displayName: String {
+		switch self {
+			case .bicycle:
+				return "Bicycle"
+			case .bicycleBell:
+				return "Bicycle Bell"
+			case .bus:
+				return "Bus"
+			case .carHorn:
+				return "Car Horn"
+			case .carPassingBy:
+				return "Car Passing By"
+			case .emergencyVehicle:
+				return "Emergency Vehicle"
+			case .motorcycle:
+				return "Motorcycle"
+			case .policeSiren:
+				return "Police Siren"
+			case .speech:
+				return "Speech"
+			case .yell:
+				return "Yell"
+		}
+	}
+}
+
 
 /// Contains customizable settings that control app behavior.
 struct AppConfiguration {
@@ -27,7 +92,7 @@ struct AppConfiguration {
 	var overlapFactor = Double(0.9)
 	
 	/// A list of sounds to identify from system audio input.
-	var monitoredSounds: Set<SoundIdentifier> = [SoundIdentifier(labelName: "bicycle_bell")]
+	var monitoredSounds: Set<SoundIdentifier> = [SoundIdentifier(labelName: Sound.bicycleBell.rawValue)]
 	
 	/// Retrieves a list of the sounds the system can identify.
 	///
@@ -44,11 +109,12 @@ struct AppConfiguration {
 	///
 	/// - Returns: A set of identifiable sounds, including the associated labels that sound
 	///   classification emits, and names suitable for displaying to the user.
-	static func listAllSoundIdentifiers() throws -> Set<SoundIdentifier> {
-		let labels: Set<String> = ["bicycle_bell", "yell", "car_horn", "emergency_vehicle","bicycle", "car_passing_by", "speech", "motorcycle", "bus", "police_siren"]
-		return Set<SoundIdentifier>(labels.map {
+	static func listAllCustomSoundIdentifiers() throws -> Set<SoundIdentifier> {
+		let labels: [String] = Sound.allCases.map( { $0.rawValue })
+		let definedSounds = Set<SoundIdentifier>(labels.map {
 			SoundIdentifier(labelName: $0)
 		})
+		return definedSounds.intersection(try listAllValidSoundIdentifiers())
 	}
 }
 
@@ -72,7 +138,12 @@ class AppState: ObservableObject {
 	/// A list of mappings between sounds and current detection states.
 	///
 	/// The app sorts this list to reflect the order in which the app displays them.
-	@Published var detectionStates: [(SoundIdentifier, DetectionState)] = []
+	@Published private var detectionStates: [DetectionStateTuple] = []
+	
+	@Published var detectedState: DetectionStateTuple?
+	
+	@Published var detectedSound: Sound?
+	@Published var detectedConfidence: CGFloat = 0.0
 	
 	/// Indicates whether a sound classification is active.
 	///
@@ -112,16 +183,18 @@ class AppState: ObservableObject {
 			.sink(receiveCompletion: { _ in self.soundDetectionState = .stopped },
 				  receiveValue: {
 				self.detectionStates = AppState.advanceDetectionStates(self.detectionStates, givenClassificationResult: $0)
+				self.findHighestDetectedState()
 			})
 		
 		self.detectionStates =
 		[SoundIdentifier](config.monitoredSounds)
 			.sorted(by: { $0.displayName < $1.displayName })
-			.map { ($0, DetectionState(presenceThreshold: 0.5,
+			.map { DetectionStateTuple(soundIdentifier: $0, detectionState: DetectionState(presenceThreshold: 0.5,
 									   absenceThreshold: 0.3,
 									   presenceMeasurementsToStartDetection: 2,
 									   absenceMeasurementsToEndDetection: 30))
 			}
+		self.findHighestDetectedState()
 		
 		soundDetectionState = .running
 		appConfig = config
@@ -139,8 +212,8 @@ class AppState: ObservableObject {
 	///   - result: The latest observation the app emits from an ongoing sound classification.
 	///
 	/// - Returns: A new array of sounds with their updated detection states.
-	static func advanceDetectionStates(_ oldStates: [(SoundIdentifier, DetectionState)],
-									   givenClassificationResult result: SNClassificationResult) -> [(SoundIdentifier, DetectionState)] {
+	static func advanceDetectionStates(_ oldStates: [DetectionStateTuple],
+									   givenClassificationResult result: SNClassificationResult) -> [DetectionStateTuple] {
 		let confidenceForLabel = { (sound: SoundIdentifier) -> Double in
 			let confidence: Double
 			let label = sound.labelName
@@ -151,8 +224,44 @@ class AppState: ObservableObject {
 			}
 			return confidence
 		}
-		return oldStates.map { (key, value) in
-			(key, DetectionState(advancedFrom: value, currentConfidence: confidenceForLabel(key)))
+		return oldStates.map { tuple in
+			DetectionStateTuple(soundIdentifier: tuple.soundIdentifier, detectionState: DetectionState(advancedFrom: tuple.detectionState, currentConfidence: confidenceForLabel(tuple.soundIdentifier)))
+		}
+	}
+	
+	private func findHighestDetectedState() {
+		detectedState = detectionStates.filter( { $0.detectionState.isDetected })
+			.max(by: { $0.detectionState.currentConfidence > $1.detectionState.currentConfidence })
+		if let detectedState = detectedState {
+			detectedSound = detectedState.soundIdentifier.type
+			detectedConfidence = detectedState.detectionState.currentConfidence
+		} else {
+			detectedSound = nil
+			detectedConfidence = 0.0
 		}
 	}
 }
+
+
+class DetectionStateTuple: ObservableObject {
+	
+	@Published var soundIdentifier: SoundIdentifier
+	@Published var detectionState: DetectionState
+	
+	init(soundIdentifier: SoundIdentifier, detectionState: DetectionState) {
+		self.soundIdentifier = soundIdentifier
+		self.detectionState = detectionState
+	}
+}
+extension DetectionStateTuple: Equatable {
+	static func == (lhs: DetectionStateTuple, rhs: DetectionStateTuple) -> Bool {
+		return lhs.soundIdentifier == rhs.soundIdentifier
+	}
+}
+
+
+//extension (SoundIdentifier, DetectionState) : Equatable {
+//	static func == (lhs: (SoundIdentifier, DetectionState), rhs: (SoundIdentifier, DetectionState)) -> Bool {
+//		return lhs.0 == rhs.0 && lhs.1 == rhs.1
+//	}
+//}

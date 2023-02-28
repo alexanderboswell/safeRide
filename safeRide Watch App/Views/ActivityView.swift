@@ -39,14 +39,14 @@ struct ActivityView: View {
 					ZStack {
 						DetectingSoundView(state: state)
 						List {
-							ForEach(state.detectionStates, id: \.0.labelName) {
-								if $0.1.isDetected {
-									Text($0.0.labelName)
-									Text("\($0.1.currentConfidence)")
-								}
+//							ForEach(state.detectionStates, id: \.0.labelName) {
+//								if $0.1.isDetected {
+//									Text($0.0.labelName)
+//									Text("\($0.1.currentConfidence)")
+//								}
 								//					generateMeterCard(confidence: $0.1.isDetected ? $0.1.currentConfidence : 0.0,
 								//									  label: $0.0.displayName)
-							}
+//							}
 						}
 					}
 			}

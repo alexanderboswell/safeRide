@@ -14,13 +14,16 @@ struct SoundIdentifier: Hashable {
 
     /// A name suitable for displaying to a user.
     var displayName: String
+	
+	var type: Sound?
 
     /// Creates a sound identifier using an internal sound classification name. This method generates a
     /// name suitable for displaying.
     ///
     /// - Parameter labelName: The name of a label the built-in sound classifier emits.
-    init(labelName: String) {
+	init(labelName: String) {
         self.labelName = labelName
+		self.type = Sound(rawValue: labelName)
         self.displayName = SoundIdentifier.displayNameForLabel(labelName)
     }
 
