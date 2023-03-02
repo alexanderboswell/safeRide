@@ -1,10 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-A class for listening to live system audio input, and for performing sound
-classification using Sound Analysis.
-*/
+//
+//  ActivityView.swift
+//  safeRide Watch App
+//
+//  Created by Alexander Boswell on 2/18/23.
+//
 
 import Foundation
 import AVFoundation

@@ -15,8 +15,6 @@ struct ContentView: View {
 	/// The runtime state that contains information about the strength of the detected sounds.
 	@StateObject var appState = AppState()
 	
-	@State private var selectedTab = 1
-	
     var body: some View {
 		TabView(selection: $selectedTab) {
 			if !(appState.soundDetectionState == .stopped) {
@@ -26,7 +24,7 @@ struct ContentView: View {
 				SettingsView(appState: appState, appConfig: $appConfig)
 					.tag(0)
 			}
-			ActivityView(state: appState, config: $appConfig)
+			ActivityView(appState: appState, appConfig: $appConfig)
 				.tag(1)
 
 		}
@@ -36,6 +34,8 @@ struct ContentView: View {
 			}
 		}
     }
+
+	@State private var selectedTab = 1
 }
 
 struct ContentView_Previews: PreviewProvider {

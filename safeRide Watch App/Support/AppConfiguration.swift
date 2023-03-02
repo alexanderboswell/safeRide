@@ -4,6 +4,7 @@
 //
 //  Created by Alexander Boswell on 2/18/23.
 //
+
 import Combine
 import SoundAnalysis
 import SwiftUI
@@ -157,24 +158,24 @@ class AppState: ObservableObject {
 	/// If the sound classification is running when calling this method, it stops before starting again.
 	///
 	/// - Parameter config: A configuration that provides information for performing sound detection.
-	func restartDetection(config: AppConfiguration) {
-		stopDetection(config: config)
-		startDetection(config: config)
+	func restartDetection(appConfig: AppConfiguration) {
+		stopDetection(appConfig: appConfig)
+		startDetection(appConfig: appConfig)
 	}
 	
-	func pauseDetection(config: AppConfiguration) {
+	func pauseDetection(appConfig: AppConfiguration) {
 		soundDetectionState = .paused
 		SystemAudioClassifier.singleton.stopSoundClassification()
 		detectionCancellable?.cancel()
 	}
 
-	func stopDetection(config: AppConfiguration) {
+	func stopDetection(appConfig: AppConfiguration) {
 		soundDetectionState = .stopped
 		SystemAudioClassifier.singleton.stopSoundClassification()
 		detectionCancellable?.cancel()
 	}
 	
-	func startDetection(config: AppConfiguration) {
+	func startDetection(appConfig: AppConfiguration) {
 		let classificationSubject = PassthroughSubject<SNClassificationResult, Error>()
 		
 		detectionCancellable =
@@ -187,7 +188,7 @@ class AppState: ObservableObject {
 			})
 		
 		self.detectionStates =
-		[SoundIdentifier](config.monitoredSounds)
+		[SoundIdentifier](appConfig.monitoredSounds)
 			.sorted(by: { $0.displayName < $1.displayName })
 			.map { DetectionStateTuple(soundIdentifier: $0, detectionState: DetectionState(presenceThreshold: 0.5,
 									   absenceThreshold: 0.3,
@@ -197,11 +198,11 @@ class AppState: ObservableObject {
 		self.findHighestDetectedState()
 		
 		soundDetectionState = .running
-		appConfig = config
+		self.appConfig = appConfig
 		SystemAudioClassifier.singleton.startSoundClassification(
 			subject: classificationSubject,
-			inferenceWindowSize: config.inferenceWindowSize,
-			overlapFactor: config.overlapFactor)
+			inferenceWindowSize: appConfig.inferenceWindowSize,
+			overlapFactor: appConfig.overlapFactor)
 	}
 	
 	/// Updates the detection states according to the latest classification result.
@@ -258,10 +259,3 @@ extension DetectionStateTuple: Equatable {
 		return lhs.soundIdentifier == rhs.soundIdentifier
 	}
 }
-
-
-//extension (SoundIdentifier, DetectionState) : Equatable {
-//	static func == (lhs: (SoundIdentifier, DetectionState), rhs: (SoundIdentifier, DetectionState)) -> Bool {
-//		return lhs.0 == rhs.0 && lhs.1 == rhs.1
-//	}
-//}

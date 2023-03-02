@@ -1,9 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-A structure that describes a sound suitable for displaying to a user.
-*/
+//
+//  ActivityView.swift
+//  safeRide Watch App
+//
+//  Created by Alexander Boswell on 2/18/23.
+//
 
 import Foundation
 

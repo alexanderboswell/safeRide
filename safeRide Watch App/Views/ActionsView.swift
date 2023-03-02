@@ -9,10 +9,7 @@ import SwiftUI
 import WatchKit
 
 struct ActionsView: View {
-	/// The runtime state that contains information about the strength of the detected sounds.
 	@ObservedObject var appState: AppState
-	
-	/// The configuration that dictates aspects of sound classification, as well as aspects of the visualization.
 	@Binding var appConfig: AppConfiguration
 	
 	@State private var showSettingsView = false
@@ -21,16 +18,16 @@ struct ActionsView: View {
 		Grid {
 			GridRow {
 				ActionView(icon: Image("route"), backgroundColor: .blue, title: "Finish") {
-					appState.stopDetection(config: appConfig)
+					appState.stopDetection(appConfig: appConfig)
 				}
 				Spacer()
 				if appState.soundDetectionState == .running {
 					ActionView(icon: Image("pause"), backgroundColor: .blue, title: "Pause") {
-						appState.pauseDetection(config: appConfig)
+						appState.pauseDetection(appConfig: appConfig)
 					}
 				} else if appState.soundDetectionState == .paused {
 					ActionView(icon: Image("play"), backgroundColor: .green, title: "Resume") {
-						appState.startDetection(config: appConfig)
+						appState.startDetection(appConfig: appConfig)
 					}
 				}
 			}
@@ -79,8 +76,8 @@ struct ActionView: View {
 	}
 }
 
-//struct ActionsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ActionsView()
-//    }
-//}
+struct ActionsView_Previews: PreviewProvider {
+    static var previews: some View {
+		ActionsView(appState: AppState(), appConfig: .constant(AppConfiguration()))
+    }
+}

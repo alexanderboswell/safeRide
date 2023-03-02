@@ -1,10 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-A structure for tracking the results of sound classification over time to predict
-detection.
-*/
+//
+//  ActivityView.swift
+//  safeRide Watch App
+//
+//  Created by Alexander Boswell on 2/18/23.
+//
 
 import Foundation
 

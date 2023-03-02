@@ -9,21 +9,12 @@ import Combine
 import SwiftUI
 
 struct DetectingSoundView: View {
-	/// The runtime state that contains information about the strength of the detected sounds.
-	@ObservedObject var state: AppState
-	@State var headlineText: String = "Listening..."
-	@State var image: Image = Image("ear")
-
-	private let detectedColor: Color = .white
-	private let nonDetectedColor: Color = .gray.opacity(0.2)
-
-	@State var imageColor = Color.white
-	@State private var currentConfidence: CGFloat = 0.0
+	@ObservedObject var appState: AppState
 
     var body: some View {
 		VStack {
 			ZStack {
-				let icon = state.detectedSound == nil ? image : state.detectedSound!.icon
+				let icon = appState.detectedSound == nil ? image : appState.detectedSound!.icon
 				icon
 					.renderingMode(.template)
 					.resizable()
@@ -35,58 +26,58 @@ struct DetectingSoundView: View {
 						radius: 50,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
-					.foregroundColor(state.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
 					Arc(centerX: proxy.size.width / 2,
 						centerY: proxy.size.height / 2,
 						radius: 50,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
-					.foregroundColor(state.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
 					Arc(centerX: proxy.size.width / 2,
 						centerY: proxy.size.height / 2,
 						radius: 60,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
-					.foregroundColor(state.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
 					Arc(centerX: proxy.size.width / 2,
 						centerY: proxy.size.height / 2,
 						radius: 60,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
-					.foregroundColor(state.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
 					Arc(centerX: proxy.size.width / 2,
 						centerY: proxy.size.height / 2,
 						radius: 70,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
-					.foregroundColor(state.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
 					Arc(centerX: proxy.size.width / 2,
 						centerY: proxy.size.height / 2,
 						radius: 70,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
-					.foregroundColor(state.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
 					Arc(centerX: proxy.size.width / 2,
 						centerY: proxy.size.height / 2,
 						radius: 80,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
-					.foregroundColor(state.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
 					Arc(centerX: proxy.size.width / 2,
 						centerY: proxy.size.height / 2,
 						radius: 80,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
-					.foregroundColor(state.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
+					.foregroundColor(appState.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
 				}
-				.animation(.easeInOut(duration: 0.1), value: state.detectedConfidence)
+				.animation(.easeInOut(duration: 0.1), value: appState.detectedConfidence)
 			}
-			let label = state.detectedSound != nil ? state.detectedSound!.displayName : headlineText
+			let label = appState.detectedSound != nil ? appState.detectedSound!.displayName : headlineText
 			Text(label)
 				.font(.headline)
 				
 		}
-		.onChange(of: state.soundDetectionState) { newValue in
+		.onChange(of: appState.soundDetectionState) { newValue in
 			switch newValue {
 				case .running:
 					headlineText = "Listening..."
@@ -100,10 +91,17 @@ struct DetectingSoundView: View {
 					break
 			}
 		}
-		.onChange(of: state.detectedSound) { newValue in
+		.onChange(of: appState.detectedSound) { newValue in
 			
 		}
     }
+	
+	@State private var headlineText: String = "Listening..."
+	@State private var image: Image = Image("ear")
+	@State private var imageColor = Color.white
+	@State private var currentConfidence: CGFloat = 0.0
+	private let detectedColor: Color = .white
+	private let nonDetectedColor: Color = .gray.opacity(0.2)
 }
 
 struct Arc : Shape {
@@ -123,6 +121,6 @@ struct Arc : Shape {
 
 struct DetectingSoundView_Previews: PreviewProvider {
     static var previews: some View {
-		DetectingSoundView(state:  AppState())
+		DetectingSoundView(appState: AppState())
     }
 }

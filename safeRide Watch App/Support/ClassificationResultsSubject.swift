@@ -1,10 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-An observer object for accepting sound classification results, completions, and
-errors, and forwarding them to a combine subject.
-*/
+//
+//  ActivityView.swift
+//  safeRide Watch App
+//
+//  Created by Alexander Boswell on 2/18/23.
+//
 
 import Foundation
 import SoundAnalysis

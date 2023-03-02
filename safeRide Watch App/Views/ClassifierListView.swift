@@ -105,8 +105,7 @@ struct ClassifierListView: View {
 	var body: some View {
 		ForEach(displayedSoundOptions, id: \.0) { classAndSelectionStatus in
 			Button(action:
-					{ SetupMonitoredSoundsView.toggleMembership(member: classAndSelectionStatus.0, set: &selectedSounds)
-				
+					{ ClassifierListView.toggleMembership(member: classAndSelectionStatus.0, set: &selectedSounds)
 			}) {
 				HStack {
 					Image(systemName: selectedSounds.contains(classAndSelectionStatus.0) ? "checkmark.circle.fill" : "circle")
@@ -115,34 +114,5 @@ struct ClassifierListView: View {
 				}
 			}
 		}
-//		ZStack {
-//			VStack {
-//				headerContent
-//				soundOptionsList
-//			}.blur(radius: querySoundsErrorMessage == nil ? 0.0 : 10.0)
-//				.disabled(querySoundsErrorMessage != nil)
-//
-//			VStack {
-//				Text("Error: failed to query recognized sounds").multilineTextAlignment(.center).padding()
-//				Text(querySoundsErrorMessage ?? "").multilineTextAlignment(.center).padding()
-//				Button("Retry",
-//					   action: {
-//					do {
-//						soundOptions = try querySoundOptions()
-//						querySoundsErrorMessage = nil
-//					} catch {
-//						querySoundsErrorMessage = "\(error)"
-//					}
-//				})
-//			}.opacity(querySoundsErrorMessage == nil ? 0.0 : 1.0)
-//				.disabled(querySoundsErrorMessage == nil)
-//		}
 	}
 }
-
-
-//struct ClassifierListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ClassifierListView()
-//    }
-//}
