@@ -9,78 +9,10 @@ import Combine
 import SoundAnalysis
 import SwiftUI
 
-enum SoundDetectionState {
-	case running
-	case paused
-	case stopped
-}
-
-enum Sound: String, CaseIterable {
-	case bicycle = "bicycle"
-	case bicycleBell = "bicycle_bell"
-	case bus = "bus"
-	case carHorn = "car_horn"
-	case carPassingBy = "car_passing_by"
-	case emergencyVehicle = "emergency_vehicle"
-	case motorcycle = "motorcycle"
-	case policeSiren = "police_siren"
-	case speech = "speech"
-	case yell = "yell"
-	
-	var icon: Image {
-		switch self {
-			case .bicycle:
-				return Image("bicycle")
-			case .bicycleBell:
-				return Image("bell")
-			case .bus:
-				return Image("bus")
-			case .carHorn:
-				return Image("car")
-			case .carPassingBy:
-				return Image("carPassingBy")
-			case .emergencyVehicle:
-				return Image("emergencyVehicle")
-			case .motorcycle:
-				return Image("motorcycle")
-			case .policeSiren:
-				return Image("policeSiren")
-			case .speech, .yell:
-				return Image("person")
-		}
-	}
-	
-	var displayName: String {
-		switch self {
-			case .bicycle:
-				return "Bicycle"
-			case .bicycleBell:
-				return "Bicycle Bell"
-			case .bus:
-				return "Bus"
-			case .carHorn:
-				return "Car Horn"
-			case .carPassingBy:
-				return "Car Passing By"
-			case .emergencyVehicle:
-				return "Emergency Vehicle"
-			case .motorcycle:
-				return "Motorcycle"
-			case .policeSiren:
-				return "Police Siren"
-			case .speech:
-				return "Speech"
-			case .yell:
-				return "Yell"
-		}
-	}
-}
-
-
 /// Contains customizable settings that control app behavior.
 struct AppConfiguration {
 	/// Indicates the amount of audio, in seconds, that informs a prediction.
-	var inferenceWindowSize = Double(1.5)
+	var inferenceWindowSize = Double(1.0)
 	
 	/// The amount of overlap between consecutive analysis windows.
 	///
@@ -118,12 +50,6 @@ struct AppConfiguration {
 }
 
 /// The runtime state of the app after setup.
-///
-/// Sound classification begins after completing the setup process. The `DetectSoundsView` displays
-/// the results of the classification. Instances of this class contain the detection information that
-/// `DetectSoundsView` renders. It incorporates new classification results as the app produces them into
-/// the cumulative understanding of what sounds are currently present. It tracks interruptions, and allows for
-/// restarting an analysis by providing a new configuration.
 class AppState: ObservableObject {
 	/// A cancellable object for the lifetime of the sound classification.
 	///
@@ -144,21 +70,16 @@ class AppState: ObservableObject {
 	@Published var detectedSound: Sound?
 	@Published var detectedConfidence: CGFloat = 0.0
 	
-	/// Indicates whether a sound classification is active.
-	///
-	/// When `false,` the sound classification has ended for some reason. This could be due to an error
-	/// emitted from Sound Analysis, or due to an interruption in the recorded audio. The app needs to prompt
-	/// the user to restart classification when `false.`
+	/// Indicates the state of sound classification .
 	@Published var soundDetectionState: SoundDetectionState = .stopped
 	
-	/// Begins detecting sounds according to the configuration you specify.
-	///
-	/// If the sound classification is running when calling this method, it stops before starting again.
-	///
-	/// - Parameter config: A configuration that provides information for performing sound detection.
-	func restartDetection(appConfig: AppConfiguration) {
-		stopDetection(appConfig: appConfig)
-		startDetection(appConfig: appConfig)
+	/// Restarts detecting sounds according to the configuration you specify.
+	/// - Parameter appConfig: A configuration that provides information for performing sound detection.
+	func restartDetectionIfNeeded(appConfig: AppConfiguration) {
+		if soundDetectionState == .running {
+			stopDetection(appConfig: appConfig)
+			startDetection(appConfig: appConfig)
+		}
 	}
 	
 	func pauseDetection(appConfig: AppConfiguration) {
@@ -229,10 +150,13 @@ class AppState: ObservableObject {
 	}
 	
 	private func findHighestDetectedState() {
+		let lastDetectedState = detectedState
 		detectedState = detectionStates.filter( { $0.detectionState.isDetected })
 			.max(by: { $0.detectionState.currentConfidence > $1.detectionState.currentConfidence })
 		if let detectedState = detectedState {
-			detectedSound = detectedState.soundIdentifier.type
+			if detectedState.soundIdentifier.type != lastDetectedState?.soundIdentifier.type {
+				detectedSound = detectedState.soundIdentifier.type
+			}
 			detectedConfidence = detectedState.detectionState.currentConfidence
 		} else {
 			detectedSound = nil

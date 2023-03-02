@@ -29,7 +29,7 @@ struct ActivityView: View {
 						}
 					}
 					.onTapGesture {
-						appState.restartDetection(appConfig: appConfig)
+						appState.startDetection(appConfig: appConfig)
 					}
 					.buttonStyle(PlainButtonStyle())
 				case .paused, .running:

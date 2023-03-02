@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ClassifierListView: View {
+	@ObservedObject var appState: AppState
+	@Binding var appConfig: AppConfiguration
+
 	/// A closure that queries the list of recognized sounds.
 	///
 	/// The app uses the results of this closure to populate the `soundOptions` state variable. This
@@ -33,9 +36,12 @@ struct ClassifierListView: View {
 	/// operate the app.
 	var doneAction: () -> Void
 	
-	init(querySoundOptions: @escaping () throws -> Set<SoundIdentifier>,
+//	var changeSelectedSoundsAction: (Set<SoundIdentifier>) -> Void
+	
+	init(appState: AppState, appConfig: Binding<AppConfiguration>, querySoundOptions: @escaping () throws -> Set<SoundIdentifier>,
 		 selectedSounds: Binding<Set<SoundIdentifier>>,
 		 doneAction: @escaping () -> Void) {
+
 		self.querySoundOptions = querySoundOptions
 		self._selectedSounds = selectedSounds
 		self.doneAction = doneAction
@@ -50,6 +56,8 @@ struct ClassifierListView: View {
 			querySoundsErrorMessage = "\(error)"
 		}
 		
+		self.appState = appState
+		self._appConfig = appConfig
 		_soundOptions = State(initialValue: soundOptions)
 		_querySoundsErrorMessage = State(initialValue: querySoundsErrorMessage)
 	}
@@ -104,9 +112,10 @@ struct ClassifierListView: View {
 	
 	var body: some View {
 		ForEach(displayedSoundOptions, id: \.0) { classAndSelectionStatus in
-			Button(action:
-					{ ClassifierListView.toggleMembership(member: classAndSelectionStatus.0, set: &selectedSounds)
-			}) {
+			Button {
+				ClassifierListView.toggleMembership(member: classAndSelectionStatus.0, set: &selectedSounds)
+				appState.restartDetectionIfNeeded(appConfig: appConfig)
+			} label: {
 				HStack {
 					Image(systemName: selectedSounds.contains(classAndSelectionStatus.0) ? "checkmark.circle.fill" : "circle")
 						.foregroundColor(Color.blue)

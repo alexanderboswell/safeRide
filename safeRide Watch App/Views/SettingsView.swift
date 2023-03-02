@@ -39,10 +39,12 @@ struct SettingsView: View {
 			}
 			Section("Listen for...") {
 				ClassifierListView(
+					appState: appState,
+					appConfig: $appConfig,
 					querySoundOptions: { return try AppConfiguration.listAllCustomSoundIdentifiers() },
 					selectedSounds: $appConfig.monitoredSounds,
 					doneAction: {
-						appState.restartDetection(appConfig: appConfig)
+						appState.restartDetectionIfNeeded(appConfig: appConfig)
 					})
 			}
 			Section("Licenses") {

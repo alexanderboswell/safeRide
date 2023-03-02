@@ -14,57 +14,48 @@ struct DetectingSoundView: View {
     var body: some View {
 		VStack {
 			ZStack {
-				let icon = appState.detectedSound == nil ? image : appState.detectedSound!.icon
 				icon
 					.renderingMode(.template)
 					.resizable()
 					.frame(width: 60, height: 60)
-					.foregroundColor(imageColor)
+					.foregroundColor(appState.soundDetectionState == .running ? detectedColor : nonDetectedColor)
 				GeometryReader { proxy in
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 50,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
 					.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 50,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
 					.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 60,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
 					.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 60,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
 					.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 70,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
 					.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 70,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
 					.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 80,
 						startAngle: .degrees(45),
 						endAngle: .degrees(-45))
 					.foregroundColor(appState.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
-					Arc(centerX: proxy.size.width / 2,
-						centerY: proxy.size.height / 2,
+					Arc(size: proxy.size,
 						radius: 80,
 						startAngle: .degrees(225),
 						endAngle: .degrees(135))
@@ -72,41 +63,41 @@ struct DetectingSoundView: View {
 				}
 				.animation(.easeInOut(duration: 0.1), value: appState.detectedConfidence)
 			}
-			let label = appState.detectedSound != nil ? appState.detectedSound!.displayName : headlineText
+
 			Text(label)
 				.font(.headline)
 				
 		}
-		.onChange(of: appState.soundDetectionState) { newValue in
-			switch newValue {
-				case .running:
-					headlineText = "Listening..."
-					image = Image("ear")
-					imageColor = detectedColor
-				case .paused:
-					headlineText = "Paused"
-					image = Image("eardeaf")
-					imageColor = nonDetectedColor
-				case .stopped:
-					break
+    }
+
+	private var icon: Image {
+		if appState.soundDetectionState == .running {
+			if let detectedSound = appState.detectedSound {
+				return detectedSound.icon
+			} else {
+				return Image("ear")
 			}
 		}
-		.onChange(of: appState.detectedSound) { newValue in
-			
+		return Image("eardeaf")
+	}
+
+	private var label: String {
+		if appState.soundDetectionState == .running {
+			if let detectedSound = appState.detectedSound {
+				return detectedSound.displayName
+			} else {
+				return "Listening..."
+			}
 		}
-    }
-	
-	@State private var headlineText: String = "Listening..."
-	@State private var image: Image = Image("ear")
-	@State private var imageColor = Color.white
-	@State private var currentConfidence: CGFloat = 0.0
+		return "Paused"
+	}
+
 	private let detectedColor: Color = .white
 	private let nonDetectedColor: Color = .gray.opacity(0.2)
 }
 
-struct Arc : Shape {
-	var centerX: CGFloat
-	var centerY: CGFloat
+fileprivate struct Arc : Shape {
+	var size: CGSize
 	var radius: CGFloat
 	var startAngle: Angle
 	var endAngle: Angle
@@ -114,7 +105,7 @@ struct Arc : Shape {
 	func path(in rect: CGRect) -> Path {
 		var p = Path()
 
-		p.addArc(center: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+		p.addArc(center: CGPoint(x: size.width/2 , y: size.height/2), radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
 		return p.strokedPath(.init(lineWidth: 3))
 	}
 }
