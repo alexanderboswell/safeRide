@@ -45,10 +45,8 @@ enum Sound: String, CaseIterable {
 				return Image("motorcycle")
 			case .policeSiren:
 				return Image("policeSiren")
-			case .speech:
-				return Image("speech")
-			case .yell:
-				return Image("yell")
+			case .speech, .yell:
+				return Image("person")
 		}
 	}
 	
