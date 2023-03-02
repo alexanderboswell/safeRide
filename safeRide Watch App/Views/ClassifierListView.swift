@@ -118,7 +118,7 @@ struct ClassifierListView: View {
 			} label: {
 				HStack {
 					Image(systemName: selectedSounds.contains(classAndSelectionStatus.0) ? "checkmark.circle.fill" : "circle")
-						.foregroundColor(Color.blue)
+						.foregroundColor(.accentColor)
 					Text(classAndSelectionStatus.0.displayName).frame(alignment: .leading)
 				}
 			}
