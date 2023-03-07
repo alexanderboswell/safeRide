@@ -9,6 +9,24 @@ import Combine
 import SoundAnalysis
 import SwiftUI
 
+enum SensitivityLevel: String, CaseIterable  {
+	case low = "Low"
+	case medium = "Medium"
+	case high = "High"
+	
+	var detectedValue: CGFloat {
+		switch self {
+			case .low:
+				return 0.8
+			case .medium:
+				return 0.65
+			case .high:
+				return 0.5
+		}
+	}
+}
+
+
 /// Contains customizable settings that control app behavior.
 struct AppConfiguration {
 	/// Indicates the amount of audio, in seconds, that informs a prediction.
@@ -70,11 +88,22 @@ class AppState: ObservableObject {
 	@Published var detectedSound: Sound?
 	@Published var detectedConfidence: CGFloat = 0.0
 	
+	@Published var sensitivity: SensitivityLevel
+	
 	/// Indicates the state of sound classification .
 	@Published var soundDetectionState: SoundDetectionState = .stopped
 	
 	/// Restarts detecting sounds according to the configuration you specify.
 	/// - Parameter appConfig: A configuration that provides information for performing sound detection.
+
+	init() {
+		if let value = UserDefaults.standard.string(forKey: "sensitivityLevel"), let sensitivity = SensitivityLevel(rawValue: value) {
+			self.sensitivity = sensitivity
+		} else {
+			self.sensitivity = .high
+		}
+	}
+
 	func restartDetectionIfNeeded(appConfig: AppConfiguration) {
 		if soundDetectionState == .running {
 			stopDetection(appConfig: appConfig)
@@ -150,14 +179,16 @@ class AppState: ObservableObject {
 	}
 	
 	private func findHighestDetectedState() {
-		let lastDetectedState = detectedState
 		detectedState = detectionStates.filter( { $0.detectionState.isDetected })
 			.max(by: { $0.detectionState.currentConfidence > $1.detectionState.currentConfidence })
 		if let detectedState = detectedState {
-			if detectedState.soundIdentifier.type != lastDetectedState?.soundIdentifier.type {
+			if detectedState.detectionState.currentConfidence > sensitivity.detectedValue {
 				detectedSound = detectedState.soundIdentifier.type
 			}
-			detectedConfidence = detectedState.detectionState.currentConfidence
+
+			if detectedSound != nil {
+				detectedConfidence = detectedState.detectionState.currentConfidence
+			}
 		} else {
 			detectedSound = nil
 			detectedConfidence = 0.0

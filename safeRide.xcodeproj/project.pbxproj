@@ -51,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F338671329B7127D00CF9327 /* safeRide-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "safeRide-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F362217D29A72F5A004F51A9 /* DetectingSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectingSoundView.swift; sourceTree = "<group>"; };
 		F385755029B05CAC005F77B5 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		F385755229B05CD7005F77B5 /* SoundDetectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDetectionState.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		F3F21D93299DE18400EF838A /* safeRide Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				F338671329B7127D00CF9327 /* safeRide-Watch-App-Info.plist */,
 				F3B490C229A184FB003D33A0 /* Views */,
 				F3F21D94299DE18400EF838A /* SafeRideApp.swift */,
 				F3A530E229A0AF9F006760D1 /* Support */,
@@ -392,6 +394,7 @@
 				DEVELOPMENT_TEAM = 7592C9QMAG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "safeRide-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = safeRide;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This application would like access to the microphone to detect and display sounds occurring in the environment.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -423,6 +426,7 @@
 				DEVELOPMENT_TEAM = 7592C9QMAG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "safeRide-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = safeRide;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This application would like access to the microphone to detect and display sounds occurring in the environment.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

@@ -33,6 +33,7 @@ struct ActivityView: View {
 					}
 					.onTapGesture {
 						appState.startDetection(appConfig: appConfig)
+						WKInterfaceDevice().play(.start)
 					}
 					.buttonStyle(PlainButtonStyle())
 				case .paused, .running:

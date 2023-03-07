@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WatchKit
 
 struct ActionsView: View {
 	@ObservedObject var appState: AppState
@@ -17,17 +16,20 @@ struct ActionsView: View {
     var body: some View {
 		Grid {
 			GridRow {
-				ActionView(icon: Image("route"), backgroundColor: .blue, title: "Finish") {
+				ActionView(icon: Image("route"), backgroundColor: .accentColor, title: "Finish") {
 					appState.stopDetection(appConfig: appConfig)
+					WKInterfaceDevice().play(.stop)
 				}
 				Spacer()
 				if appState.soundDetectionState == .running {
-					ActionView(icon: Image("pause"), backgroundColor: .blue, title: "Pause") {
+					ActionView(icon: Image("pause"), backgroundColor: .accentColor, title: "Pause") {
 						appState.pauseDetection(appConfig: appConfig)
+						WKInterfaceDevice().play(.click)
 					}
 				} else if appState.soundDetectionState == .paused {
-					ActionView(icon: Image("play"), backgroundColor: .green, title: "Resume") {
+					ActionView(icon: Image("play"), backgroundColor: .accentColor, title: "Resume") {
 						appState.startDetection(appConfig: appConfig)
+						WKInterfaceDevice().play(.start)
 					}
 				}
 			}
@@ -35,6 +37,7 @@ struct ActionsView: View {
 			GridRow {
 				ActionView(icon: Image("gear"), backgroundColor: .gray, title: "Settings") {
 					showSettingsView = true
+					WKInterfaceDevice().play(.click)
 
 				}
 				Spacer()

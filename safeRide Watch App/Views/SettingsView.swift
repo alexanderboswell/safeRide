@@ -10,10 +10,7 @@ import SwiftUI
 struct SettingsView: View {
 	@ObservedObject var appState: AppState
 	@Binding var appConfig: AppConfiguration
-	
-	@State var sensitivity: String = "High"
-	var sensitivies = ["Low", "Medium", "High"]
-	
+
     var body: some View {
 		List {
 			Section("Personalization") {
@@ -31,9 +28,9 @@ struct SettingsView: View {
 //					}
 //				}
 				
-				Picker("Sensitivity", selection: $sensitivity) {
-					ForEach(sensitivies, id: \.self) {
-						Text($0)
+				Picker("Sensitivity", selection: $appState.sensitivity) {
+					ForEach(SensitivityLevel.allCases, id: \.self) {
+						Text($0.rawValue)
 					}
 				}
 			}
@@ -49,6 +46,9 @@ struct SettingsView: View {
 			}
 			Section("Licenses") {
 				
+			}
+			.onChange(of: appState.sensitivity) { newValue in
+				UserDefaults.standard.set(newValue.rawValue, forKey: "sensitivityLevel")
 			}
 		}
     }

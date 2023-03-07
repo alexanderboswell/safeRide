@@ -68,7 +68,17 @@ struct DetectingSoundView: View {
 				.font(.headline)
 				
 		}
+		.onChange(of: appState.detectedConfidence) { _ in
+			if appState.detectedConfidence > appState.sensitivity.detectedValue {
+				playHaptics()
+			}
+		}
+		
     }
+	
+	private func playHaptics() {
+		WKInterfaceDevice().play(.notification)
+	}
 
 	private var icon: Image {
 		if appState.soundDetectionState == .running {
