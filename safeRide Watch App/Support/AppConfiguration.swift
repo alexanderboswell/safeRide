@@ -13,7 +13,7 @@ enum SensitivityLevel: String, CaseIterable  {
 	case low = "Low"
 	case medium = "Medium"
 	case high = "High"
-	
+
 	var detectedValue: CGFloat {
 		switch self {
 			case .low:
