@@ -44,4 +44,9 @@ To address the [Animation From Interactions (Level AAA)](https://www.w3.org/WAI/
 | ------------------ | ------------------- |
 | | |
 
+![Simulator Screen Shot - Apple Watch Series 7 (41mm) - 2023-03-10 at 12 52 05](https://user-images.githubusercontent.com/21343215/224426049-c4a36864-346e-4ba3-b62f-02126cd87e77.png)
+![Simulator Screen Shot - Apple Watch Series 7 (41mm) - 2023-03-10 at 12 52 17](https://user-images.githubusercontent.com/21343215/224426064-ca4cec84-419e-4b11-bf4d-f3fdd48a9027.png)
+
+
+
 ## Licenses ## 
