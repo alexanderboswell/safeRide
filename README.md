@@ -36,15 +36,12 @@ The app has been tested for navigation with VoiceOver. A low vision or blind use
  #### Sensitivity options ####
  For sound classification, a user can adjust the sensitivity of sound recognition. Changing this option allows a user to receive more or less notifications based on the context they are currently riding in.
  
-<img width="250" alt="A list of settings options, the first one called sensitivtiy with a value of high." src="https://user-images.githubusercontent.com/21343215/224410978-adc1cbdc-072b-478b-b8a6-44d5f436be58.png"> <img width="250" alt="A list of sensitivity options. The high option is currently selected." src="https://user-images.githubusercontent.com/21343215/224410995-0e285149-8ec9-45b1-bc51-e483d43fe9f8.png">
+<img width="250" alt="A list of settings options, the first one called sensitivtiy with a value of high." src="https://user-images.githubusercontent.com/21343215/224427107-2943fa96-638f-4cca-99c7-82730cb4633e.png"> <img width="250" alt="A list of sensitivity options. The high option is currently selected." src="https://user-images.githubusercontent.com/21343215/224410995-0e285149-8ec9-45b1-bc51-e483d43fe9f8.png">
 
 ### Animation toggle ###
 To address the [Animation From Interactions (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html) WCAG 2.1 standard, an option has been created so that a user can turn off animations. The app heavily relies on providing information about sound recognition through an animation, icon, and label. When animations are disabled an alternative UI is provided.
 | Animations enabled | Animations disabled |
 | ------------------ | ------------------- |
 |<img width="250" alt="Shows an icon for a bicycle bell with text 'Bicycle Bell'. Half circles can be seen on either side of the icon indicating a signal strength." src="https://user-images.githubusercontent.com/21343215/224426049-c4a36864-346e-4ba3-b62f-02126cd87e77.png"> | <img width="250" alt="Shows an icon for a bicycle bell with text saying 'Heard sound: Bicycle Bell'." src="https://user-images.githubusercontent.com/21343215/224426064-ca4cec84-419e-4b11-bf4d-f3fdd48a9027.png"> |
-
-
-
 
 ## Licenses ## 
