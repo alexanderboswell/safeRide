@@ -19,14 +19,17 @@ struct ActivityView: View {
 						ZStack {
 							Image("background")
 								.cornerRadius(proxy.size.width/2)
+								.accessibilityHidden(true)
 							VStack {
 								Image("bicycle")
 									.resizable()
 									.renderingMode(.template)
 									.tint(.white)
 									.frame(width: 90, height: 90)
+									.accessibilityHidden(true)
 								Text("Start")
 									.font(.headline)
+									.accessibilityHidden(true)
 							}
 						}
 						.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -36,6 +39,7 @@ struct ActivityView: View {
 						WKInterfaceDevice().play(.start)
 					}
 					.buttonStyle(PlainButtonStyle())
+					.accessibilityLabel(Text("Start"))
 					.accessibilityAddTraits(.isButton)
 				case .paused, .running:
 					DetectingSoundView(appState: appState)
