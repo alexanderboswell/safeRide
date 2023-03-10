@@ -1,5 +1,9 @@
 # Safe Ride #
 
+
+<img width="250" alt="Shows a user interface with a round button that says start." src="https://user-images.githubusercontent.com/21343215/224447117-b0b21ded-d90e-4bba-9025-c5d2c563810a.png"> <img width="250" alt="Shows an icon for an ear with text 'Listening...'. Half circles can be seen on either side of the icon indicating a signal strength." src="https://user-images.githubusercontent.com/21343215/224447120-86b6c5d9-219e-45c7-82ec-048a8cc1e6d0.png"> <img width="250" alt="A list of sound options that can be selected." src="https://user-images.githubusercontent.com/21343215/224447121-3e51749d-13de-478a-8a53-e309d37bf2c7.png"> 
+
+
 ## Introduction ##
 
 Safely cycling in an urban or off road setting depends on being able to process and respond to events such as sights, sounds, and changing landscape. Current solutions include bicycle bells, rear view mirrors, lights, and road signs. Along with these solutions each state or country has a set of laws that dictate how cyclists interact with each other and vehicles on the road. In the state of Washington a set of [Bicycle Laws](https://wabikes.org/index.php/growing-bicycling/washington-bike-laws/bicycle-laws-safety-revised-code-of-washington-state-bicycle-related) provide details on the interactions.
