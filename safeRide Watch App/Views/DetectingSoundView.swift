@@ -12,61 +12,76 @@ struct DetectingSoundView: View {
 	@ObservedObject var appState: AppState
 
     var body: some View {
-		VStack {
-			ZStack {
-				icon
-					.renderingMode(.template)
-					.resizable()
-					.frame(width: 60, height: 60)
-					.foregroundColor(appState.soundDetectionState == .running ? detectedColor : nonDetectedColor)
-				GeometryReader { proxy in
-					Arc(size: proxy.size,
-						radius: 50,
-						startAngle: .degrees(45),
-						endAngle: .degrees(-45))
-					.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
-					Arc(size: proxy.size,
-						radius: 50,
-						startAngle: .degrees(225),
-						endAngle: .degrees(135))
-					.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
-					Arc(size: proxy.size,
-						radius: 60,
-						startAngle: .degrees(45),
-						endAngle: .degrees(-45))
-					.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
-					Arc(size: proxy.size,
-						radius: 60,
-						startAngle: .degrees(225),
-						endAngle: .degrees(135))
-					.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
-					Arc(size: proxy.size,
-						radius: 70,
-						startAngle: .degrees(45),
-						endAngle: .degrees(-45))
-					.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
-					Arc(size: proxy.size,
-						radius: 70,
-						startAngle: .degrees(225),
-						endAngle: .degrees(135))
-					.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
-					Arc(size: proxy.size,
-						radius: 80,
-						startAngle: .degrees(45),
-						endAngle: .degrees(-45))
-					.foregroundColor(appState.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
-					Arc(size: proxy.size,
-						radius: 80,
-						startAngle: .degrees(225),
-						endAngle: .degrees(135))
-					.foregroundColor(appState.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
+		Group {
+			if appState.animationsEnabled {
+				VStack {
+					ZStack {
+						icon
+							.renderingMode(.template)
+							.resizable()
+							.frame(width: 60, height: 60)
+							.foregroundColor(appState.soundDetectionState == .running ? detectedColor : nonDetectedColor)
+						GeometryReader { proxy in
+							Arc(size: proxy.size,
+								radius: 50,
+								startAngle: .degrees(45),
+								endAngle: .degrees(-45))
+							.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
+							Arc(size: proxy.size,
+								radius: 50,
+								startAngle: .degrees(225),
+								endAngle: .degrees(135))
+							.foregroundColor(appState.detectedConfidence > 0.2 ? detectedColor : nonDetectedColor)
+							Arc(size: proxy.size,
+								radius: 60,
+								startAngle: .degrees(45),
+								endAngle: .degrees(-45))
+							.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
+							Arc(size: proxy.size,
+								radius: 60,
+								startAngle: .degrees(225),
+								endAngle: .degrees(135))
+							.foregroundColor(appState.detectedConfidence > 0.4 ? detectedColor : nonDetectedColor)
+							Arc(size: proxy.size,
+								radius: 70,
+								startAngle: .degrees(45),
+								endAngle: .degrees(-45))
+							.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
+							Arc(size: proxy.size,
+								radius: 70,
+								startAngle: .degrees(225),
+								endAngle: .degrees(135))
+							.foregroundColor(appState.detectedConfidence > 0.6 ? detectedColor : nonDetectedColor)
+							Arc(size: proxy.size,
+								radius: 80,
+								startAngle: .degrees(45),
+								endAngle: .degrees(-45))
+							.foregroundColor(appState.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
+							Arc(size: proxy.size,
+								radius: 80,
+								startAngle: .degrees(225),
+								endAngle: .degrees(135))
+							.foregroundColor(appState.detectedConfidence > 0.8 ? detectedColor : nonDetectedColor)
+						}
+						.animation(.easeInOut(duration: 0.1), value: appState.detectedConfidence)
+					}
 				}
-				.animation(.easeInOut(duration: 0.1), value: appState.detectedConfidence)
+			} else {
+				VStack {
+					icon
+						.renderingMode(.template)
+						.resizable()
+						.frame(width: 100, height: 100)
+						.foregroundColor(appState.soundDetectionState == .running ? detectedColor : nonDetectedColor)
+					Spacer()
+					if appState.detectedSound != nil {
+						Text("Heard sound:")
+							.font(.headline)
+					}
+					Text(label)
+						.font(.headline)
+				}
 			}
-
-			Text(label)
-				.font(.headline)
-				
 		}
 		.onChange(of: appState.detectedConfidence) { _ in
 			if appState.detectedConfidence > appState.sensitivity.detectedValue {

@@ -10,6 +10,7 @@
 		F362217E29A72F5A004F51A9 /* DetectingSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F362217D29A72F5A004F51A9 /* DetectingSoundView.swift */; };
 		F385755129B05CAC005F77B5 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = F385755029B05CAC005F77B5 /* Sound.swift */; };
 		F385755329B05CD7005F77B5 /* SoundDetectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F385755229B05CD7005F77B5 /* SoundDetectionState.swift */; };
+		F3899EA629BBC4F900D53ABB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3899EA529BBC4F900D53ABB /* AppState.swift */; };
 		F3A530DF29A0AF8C006760D1 /* SystemAudioClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530DE29A0AF8C006760D1 /* SystemAudioClassifier.swift */; };
 		F3A530E929A0AF9F006760D1 /* SoundIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E329A0AF9F006760D1 /* SoundIdentifier.swift */; };
 		F3A530EC29A0AF9F006760D1 /* DetectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A530E629A0AF9F006760D1 /* DetectionState.swift */; };
@@ -55,6 +56,7 @@
 		F362217D29A72F5A004F51A9 /* DetectingSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectingSoundView.swift; sourceTree = "<group>"; };
 		F385755029B05CAC005F77B5 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		F385755229B05CD7005F77B5 /* SoundDetectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDetectionState.swift; sourceTree = "<group>"; };
+		F3899EA529BBC4F900D53ABB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		F3A530DE29A0AF8C006760D1 /* SystemAudioClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioClassifier.swift; sourceTree = "<group>"; };
 		F3A530E329A0AF9F006760D1 /* SoundIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundIdentifier.swift; sourceTree = "<group>"; };
 		F3A530E629A0AF9F006760D1 /* DetectionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectionState.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				F3B490C729A18E13003D33A0 /* AppConfiguration.swift */,
 				F385755029B05CAC005F77B5 /* Sound.swift */,
 				F385755229B05CD7005F77B5 /* SoundDetectionState.swift */,
+				F3899EA529BBC4F900D53ABB /* AppState.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				F3A530ED29A0AF9F006760D1 /* ClassificationResultsSubject.swift in Sources */,
 				F3A530E929A0AF9F006760D1 /* SoundIdentifier.swift in Sources */,
 				F3B490C829A18E13003D33A0 /* AppConfiguration.swift in Sources */,
+				F3899EA629BBC4F900D53ABB /* AppState.swift in Sources */,
 				F362217E29A72F5A004F51A9 /* DetectingSoundView.swift in Sources */,
 				F3B490CC29A19578003D33A0 /* SettingsView.swift in Sources */,
 				F3B490C429A1853E003D33A0 /* ContentView.swift in Sources */,

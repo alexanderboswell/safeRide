@@ -16,18 +16,18 @@ struct ActionsView: View {
     var body: some View {
 		Grid {
 			GridRow {
-				ActionView(icon: Image("route"), backgroundColor: .accentColor, title: "Finish") {
+				ActionView(icon: Image("route"),foregroundColor: .white, backgroundColor: Color("DarkAccentColor"), title: "Finish") {
 					appState.stopDetection(appConfig: appConfig)
 					WKInterfaceDevice().play(.stop)
 				}
 				Spacer()
 				if appState.soundDetectionState == .running {
-					ActionView(icon: Image("pause"), backgroundColor: .accentColor, title: "Pause") {
+					ActionView(icon: Image("pause"), foregroundColor: .white, backgroundColor: Color("DarkAccentColor"), title: "Pause") {
 						appState.pauseDetection(appConfig: appConfig)
 						WKInterfaceDevice().play(.click)
 					}
 				} else if appState.soundDetectionState == .paused {
-					ActionView(icon: Image("play"), backgroundColor: .accentColor, title: "Resume") {
+					ActionView(icon: Image("play"), foregroundColor: .white, backgroundColor: Color("DarkAccentColor"), title: "Resume") {
 						appState.startDetection(appConfig: appConfig)
 						WKInterfaceDevice().play(.start)
 					}
@@ -35,7 +35,7 @@ struct ActionsView: View {
 			}
 			Spacer()
 			GridRow {
-				ActionView(icon: Image("gear"), backgroundColor: .gray, title: "Settings") {
+				ActionView(icon: Image("gear"), foregroundColor: Color("GrayColor"), backgroundColor: .white, title: "Settings") {
 					showSettingsView = true
 					WKInterfaceDevice().play(.click)
 
@@ -51,6 +51,7 @@ struct ActionsView: View {
 
 struct ActionView: View {
 	var icon: Image
+	var foregroundColor: Color
 	var backgroundColor: Color
 	var title: String
 	var action: () -> Void
@@ -63,7 +64,7 @@ struct ActionView: View {
 				icon
 					.renderingMode(.template)
 					.resizable()
-					.foregroundColor(.white)
+					.foregroundColor(foregroundColor)
 					.padding()
 		
 			}

@@ -36,6 +36,7 @@ struct ActivityView: View {
 						WKInterfaceDevice().play(.start)
 					}
 					.buttonStyle(PlainButtonStyle())
+					.accessibilityAddTraits(.isButton)
 				case .paused, .running:
 					DetectingSoundView(appState: appState)
 			}

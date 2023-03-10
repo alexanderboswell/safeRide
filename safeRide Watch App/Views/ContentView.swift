@@ -36,6 +36,15 @@ struct ContentView: View {
     }
 
 	@State private var selectedTab = 1
+	
+	init() {
+		let userDefaultsDefaults: [String : Any] = [
+			"animationsEnabled" : true,
+			"sensitivityLevel" : SensitivityLevel.high.rawValue
+		]
+		
+		UserDefaults.standard.register(defaults: userDefaultsDefaults)
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -13,27 +13,6 @@ struct SettingsView: View {
 
     var body: some View {
 		List {
-			Section("Personalization") {
-//				Button {
-//
-//				} label: {
-//					HStack {
-//						Image("bell")
-//							.resizable()
-//							.renderingMode(.template)
-//							.tint(.white)
-//							.frame(width: 32, height: 32)
-//						Text("Add my bicycle bell")
-//							.padding(.leading, 10)
-//					}
-//				}
-				
-				Picker("Sensitivity", selection: $appState.sensitivity) {
-					ForEach(SensitivityLevel.allCases, id: \.self) {
-						Text($0.rawValue)
-					}
-				}
-			}
 			Section("Listen for...") {
 				ClassifierListView(
 					appState: appState,
@@ -44,11 +23,23 @@ struct SettingsView: View {
 						appState.restartDetectionIfNeeded(appConfig: appConfig)
 					})
 			}
+			Section("Personalization") {
+				Picker("Sensitivity", selection: $appState.sensitivity) {
+					ForEach(SensitivityLevel.allCases, id: \.self) {
+						Text($0.rawValue)
+					}
+				}
+				.onChange(of: appState.sensitivity) { newValue in
+					UserDefaults.standard.set(newValue.rawValue, forKey: "sensitivityLevel")
+				}
+
+				Toggle("Animations", isOn: $appState.animationsEnabled)
+					.onChange(of: appState.animationsEnabled) { newValue in
+						UserDefaults.standard.set(newValue, forKey: "animationsEnabled")
+					}
+			}
 			Section("Licenses") {
 				
-			}
-			.onChange(of: appState.sensitivity) { newValue in
-				UserDefaults.standard.set(newValue.rawValue, forKey: "sensitivityLevel")
 			}
 		}
     }
