@@ -42,10 +42,8 @@ The app has been tested for navigation with VoiceOver. A low vision or blind use
 To address the [Animation From Interactions (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html) WCAG 2.1 standard, an option has been created so that a user can turn off animations. The app heavily relies on providing information about sound recognition through an animation, icon, and label. When animations are disabled an alternative UI is provided.
 | Animations enabled | Animations disabled |
 | ------------------ | ------------------- |
-| | |
+|<img width="250" alt="Shows an icon for a bicycle bell with text 'Bicycle Bell'. Half circles can be seen on either side of the icon indicating a signal strength." src="https://user-images.githubusercontent.com/21343215/224426049-c4a36864-346e-4ba3-b62f-02126cd87e77.png"> | <img width="250" alt="Shows an icon for a bicycle bell with text saying 'Heard sound: Bicycle Bell'." src="https://user-images.githubusercontent.com/21343215/224426064-ca4cec84-419e-4b11-bf4d-f3fdd48a9027.png"> |
 
-![Simulator Screen Shot - Apple Watch Series 7 (41mm) - 2023-03-10 at 12 52 05](https://user-images.githubusercontent.com/21343215/224426049-c4a36864-346e-4ba3-b62f-02126cd87e77.png)
-![Simulator Screen Shot - Apple Watch Series 7 (41mm) - 2023-03-10 at 12 52 17](https://user-images.githubusercontent.com/21343215/224426064-ca4cec84-419e-4b11-bf4d-f3fdd48a9027.png)
 
 
 

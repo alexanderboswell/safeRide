@@ -65,6 +65,8 @@ struct DetectingSoundView: View {
 						}
 						.animation(.easeInOut(duration: 0.1), value: appState.detectedConfidence)
 					}
+					Text(label)
+						.font(.headline)
 				}
 			} else {
 				VStack {
