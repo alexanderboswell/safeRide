@@ -17,6 +17,7 @@ struct ActionsView: View {
 		Grid {
 			GridRow {
 				ActionView(icon: Image("route"),foregroundColor: .white, backgroundColor: Color("DarkAccentColor"), title: "Finish") {
+					appState.detectedSoundHistory.removeAll()
 					appState.stopDetection(appConfig: appConfig)
 					WKInterfaceDevice().play(.stop)
 				}

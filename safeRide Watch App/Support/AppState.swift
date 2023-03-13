@@ -37,6 +37,8 @@ class AppState: ObservableObject {
 	/// Indicates the state of sound classification .
 	@Published var soundDetectionState: SoundDetectionState = .stopped
 	
+	@Published var detectedSoundHistory: [HistoryData] = []
+	
 	/// Restarts detecting sounds according to the configuration you specify.
 	/// - Parameter appConfig: A configuration that provides information for performing sound detection.
 	
@@ -125,19 +127,35 @@ class AppState: ObservableObject {
 	}
 	
 	private func findHighestDetectedState() {
+		let lastDetectedSound = detectedState?.soundIdentifier.type
 		detectedState = detectionStates.filter( { $0.detectionState.isDetected })
 			.max(by: { $0.detectionState.currentConfidence > $1.detectionState.currentConfidence })
 		if let detectedState = detectedState {
 			if detectedState.detectionState.currentConfidence > sensitivity.detectedValue {
 				detectedSound = detectedState.soundIdentifier.type
+				if let detectedSound = detectedSound, lastDetectedSound != detectedSound {
+					detectedSoundHistory.append(HistoryData(sound: detectedSound, date: Date.now))
+				}
 			}
 			
 			if detectedSound != nil {
 				detectedConfidence = detectedState.detectionState.currentConfidence
 			}
+			
 		} else {
 			detectedSound = nil
 			detectedConfidence = 0.0
 		}
+	}
+}
+
+class HistoryData: ObservableObject {
+	
+	@Published var sound: Sound
+	@Published var date: Date
+	
+	init(sound: Sound, date: Date) {
+		self.sound = sound
+		self.date = date
 	}
 }

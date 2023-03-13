@@ -26,6 +26,10 @@ struct ContentView: View {
 			}
 			ActivityView(appState: appState, appConfig: $appConfig)
 				.tag(1)
+			
+			if appState.soundDetectionState == .running {
+				HistoryView(appState: appState)
+			}
 
 		}
 		.onChange(of: appState.soundDetectionState) { newValue in

@@ -26,6 +26,14 @@ Other common results from the studies also emerged. A combination of visual and 
 
 ## Methodology ##
 
+Based on the related work, the goal of the project was to create an app that is tailored to do sound classification for a cyclist. The experience is built upon the insight that was observed in the studies mentioned.
+
+Currently, the iPhone operating system (iOS) does provide some sound classification functionality. Unfortunately it fails in two major ways. First, it only has a subset of sounds that are available to be recognized which are more general use like a fire alarm, door bell, or baby crying. Second, a user will only get prompted of this sound recognition through a notification. When cycling, that information is difficult to consume as it is temporarily and requires input to get all of the details.
+
+So the solution is to provide sound recognition through a trained model on sounds that occur while cycling. The base model is one provided by Apple and is trained on a variety of bicycle bells. I focused on this type of communication as it is a common practice to use a bicycle bell when cycling to indicate passing or approaching. It was trained with additional data that I collected while riding my own bicycle. This made it so the model was more accurate when used in a common environment the app is designed to be used in, trail riding.
+
+Secondly, the user interface was designed based on the outcomes of the research that are referenced. The app will convey sound recognition through a visual representation by an icon and strength level. It will also provide a tactile response through haptics. Also based on the research, a user can adjust [multiple settings](#adjustable-settings) in the app so that it meets their needs. By having this information readily available and consumable through multiple senses, a hard of hearing person can use this information to ride safely in environments they might not be able to otherwise.
+
 ## Disability justice perspective ##
 
 ### Collective access ###
@@ -33,6 +41,15 @@ Other common results from the studies also emerged. A combination of visual and 
 ### First person account ###
 
 ## Learnings ##
+
+## Future work ##
+Many of the sound classifiers used in the app are models provided by Apple. The classifiers are for general use and not trained on data that accurately reflects the environments encountered while cycling. To address this, custom models should be created for all sounds provided in the app. Also, the model that I did train was only improved by my own personal data which is bias by where I ride and my riding ability.
+
+An issue quickly arises when a cyclist uses this app and their own bicycle bell is detected. Adding the capability of on device machine learning so that the user can ensure their own bike bell is not recognized would reduce frustration of false positives in sound recognition.
+
+An Apple Watch provides information from an app through [complications](https://developer.apple.com/design/human-interface-guidelines/components/system-experiences/complications). Having the information from this app be surfaced in other ways would allow a user to view it alongside other apps they might be using at the same time.
+
+A general refactor of code also should occur. Many of software best practices are not implemented in the minimal viable product.
 
 ## App accessibility ##
 The app uses apple conventions that are defined in the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/platforms/designing-for-watchos). Following these patterns allow the app to be accessible as it builds upon the work of Apple in their design decisions.
@@ -56,14 +73,5 @@ To address the [Animation From Interactions (Level AAA)](https://www.w3.org/WAI/
 | Animations enabled | Animations disabled |
 | ------------------ | ------------------- |
 |<img width="250" alt="Shows an icon for a bicycle bell with text 'Bicycle Bell'. Half circles can be seen on either side of the icon indicating a signal strength." src="https://user-images.githubusercontent.com/21343215/224426049-c4a36864-346e-4ba3-b62f-02126cd87e77.png"> | <img width="250" alt="Shows an icon for a bicycle bell with text saying 'Heard sound: Bicycle Bell'." src="https://user-images.githubusercontent.com/21343215/224426064-ca4cec84-419e-4b11-bf4d-f3fdd48a9027.png"> |
-
-## Future work ##
-Many of the sound classifiers used in the app are models provided by Apple. The classifiers are for general use and not trained on data that accurately reflects the environments encountered while cycling. To address this, custom models should be created for all sounds provided in the app.
-
-An issue quickly arises when a cyclist uses this app and their own bicycle bell is detected. Adding the capability of on device machine learning so that the user can ensure their own bike bell is not recognized would reduce frustration of false positives in sound recognition.
-
-An Apple Watch provides information from an app through [complications](https://developer.apple.com/design/human-interface-guidelines/components/system-experiences/complications). Having the information from this app be surfaced in other ways would allow a user to view it alongside other apps they might be using at the same time.
-
-A general refactor of code also should occur. Many of software best practices are not implemented in the minimal viable product.
 
 ## Licenses ## 
