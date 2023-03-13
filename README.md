@@ -82,6 +82,6 @@ To address the [Animation From Interactions (Level AAA)](https://www.w3.org/WAI/
 
 ## Licenses ## 
 
-[Apple sound classifier Demo application]()
+[Apple sound classifier demo application](https://github.com/alexanderboswell/safeRide/blob/main/licenses/LICENSE.txt)
 
 Background of icon image by <a href="https://www.freepik.com/free-vector/green-topographic-map-background_8904743.htm#query=topographic%20map&position=24&from_view=search&track=ais">Freepik</a>
