@@ -7,7 +7,7 @@
 
 Safely cycling in an urban or off road setting depends on being able to process and respond to events such as sights, sounds, and changing landscape. Current solutions include bicycle bells, rear view mirrors, lights, and road signs. Along with these solutions each state or country has a set of laws that dictate how cyclists interact with each other and vehicles on the road. In the state of Washington a set of [Bicycle Laws](https://wabikes.org/index.php/growing-bicycling/washington-bike-laws/bicycle-laws-safety-revised-code-of-washington-state-bicycle-related) provide details on the interactions.
 
-Many of the interactions between two cyclists or a cyclist and a vehicle occur through sound. For an individual who is hard of hearing, the event could be difficult or impossible to recognize otherwise. For example, if a cyclist on a dirt trail is coming around a blind corner towards another cyclist and rings their bell, a hard of hearing person has no visual alternative to respond to that event. Another scenario is if a vehicle or a cyclist is passing a cyclist. The current solution of a rear view mirror helps to solve this problem but requires a cyclist to constantly check their surroundings instead of giving attention to the road in front of them. This can result in neck strain and increased likelihood of accidents from looking back more often.
+Many of the interactions between two cyclists or a cyclist and a vehicle occur through sound. For an individual who is hard of hearing, the event could be difficult or impossible to recognize otherwise. For example, if a cyclist on a dirt trail is coming around a blind corner towards another cyclist and rings their bell, a hard of hearing person has no visual alternative to respond to that event. Another scenario is if a vehicle or a cyclist is passing a cyclist. The current solution of a rear view mirror helps to solve this problem but requires a cyclist to constantly check their surroundings instead of giving attention to the road in front of them. This can result in [neck strain](#first-person-account) and increased likelihood of accidents from looking back more often.
 
 The goal of the app is to provide a solution through a combination of visual and haptic feedback. By allowing a hard of hearing individual to be notified of events happening around them, they can ride safely. The app runs on an Apple Watch and utilizes the device microphone. By actively listening, the app can identify many common sounds that can occur while cycling. When a sound is identified, a user will be notified both visually and tactually. By having the information be available in real time and easily viewable on the wrist of a cyclist, they can respond to events occurring around them.
 
@@ -38,12 +38,18 @@ Secondly, the user interface was designed based on the outcomes of the research 
 
 ### Collective access ###
 
-### First person account ###
+The app aims to address the [disability justice of collective access](https://static1.squarespace.com/static/5bed3674f8370ad8c02efd9a/t/5f1f0783916d8a179c46126d/1595869064521/10_Principles_of_DJ-2ndEd.pdf). The app is designed to help a hard of hearing cyclist in an environment they function differently in. The environment heavily relies on sounds to convey important safety information which there is no other way to convey. While researching the project I searched for other alternatives that could meet the needs through the community. The only other solution that was found was a vest that would be worn by a cyclist to self identify as hard of hearing. This solution does not allow a cyclist to work with others in the community towards a common goal as it marks them as a problem instead of a way to share responsibility for access needs. Any other possible community solutions require a hard of hearing individual to compromise their location or identity to have their needs met. So the app allows an individual to address their needs privately while still having access to the same roads and trails as cyclists and vehicles. It gives a cyclist autonomy to pursue their passion of cycling individually or in community events without sacrificing their safety.
+
+## First person account ##
+
+The design of the app leans heavily on a hard of hearing cyclist and the challenges that he faces. As he describes in an [article from The Guardian](https://www.theguardian.com/environment/bike-blog/2016/apr/15/im-deaf-but-it-doesnt-stop-me-cycling), neck strain, lack of knowledge of what is behind him, and difficulty coordinating with other cyclists have all lead to un-safe riding practices. Shane Prendergast does not let this limit his passion for cycling but does recognize these issues pose a challenge for him.
 
 ## Learnings ##
 
+Throughout the creation of the app, there were multiple times I saw the shortcomings of it not being accessible. As an experienced app developer it was surprising how a small app could fall short to addressing the needs of different types of disabilities that heard of hearing individuals using the app might also have. I was able to address some of these before completing the project, but was not able to user test it with the disability community. This lead me to start researching other apps that those in the disability community highly regard to mimic some of the best practices for accessible apps.
+
 ## Future work ##
-Many of the sound classifiers used in the app are models provided by Apple. The classifiers are for general use and not trained on data that accurately reflects the environments encountered while cycling. To address this, custom models should be created for all sounds provided in the app. Also, the model that I did train was only improved by my own personal data which is bias by where I ride and my riding ability.
+Many of the sound classifiers used in the app are models provided by Apple. The classifiers are for general use and not trained on data that accurately reflects the environments encountered while cycling. To address this, custom models should be created for all sounds provided in the app. Also, the model that I did train was only improved by my own personal data which is biased by where I ride and my riding ability.
 
 An issue quickly arises when a cyclist uses this app and their own bicycle bell is detected. Adding the capability of on device machine learning so that the user can ensure their own bike bell is not recognized would reduce frustration of false positives in sound recognition.
 
@@ -75,3 +81,7 @@ To address the [Animation From Interactions (Level AAA)](https://www.w3.org/WAI/
 |<img width="250" alt="Shows an icon for a bicycle bell with text 'Bicycle Bell'. Half circles can be seen on either side of the icon indicating a signal strength." src="https://user-images.githubusercontent.com/21343215/224426049-c4a36864-346e-4ba3-b62f-02126cd87e77.png"> | <img width="250" alt="Shows an icon for a bicycle bell with text saying 'Heard sound: Bicycle Bell'." src="https://user-images.githubusercontent.com/21343215/224426064-ca4cec84-419e-4b11-bf4d-f3fdd48a9027.png"> |
 
 ## Licenses ## 
+
+[Apple sound classifier Demo application]()
+
+Background of icon image by <a href="https://www.freepik.com/free-vector/green-topographic-map-background_8904743.htm#query=topographic%20map&position=24&from_view=search&track=ais">Freepik</a>
