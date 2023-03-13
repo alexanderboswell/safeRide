@@ -1,7 +1,6 @@
 # Safe Ride #
 
-
-<img width="250" alt="Shows a user interface with a round button that says start." src="https://user-images.githubusercontent.com/21343215/224447117-b0b21ded-d90e-4bba-9025-c5d2c563810a.png"> <img width="250" alt="Shows an icon for an ear with text 'Listening...'. Half circles can be seen on either side of the icon indicating a signal strength." src="https://user-images.githubusercontent.com/21343215/224447120-86b6c5d9-219e-45c7-82ec-048a8cc1e6d0.png"> <img width="250" alt="A list of sound options that can be selected." src="https://user-images.githubusercontent.com/21343215/224447121-3e51749d-13de-478a-8a53-e309d37bf2c7.png"> 
+<img width="200" alt="Shows a user interface with a round button that says start." src="https://user-images.githubusercontent.com/21343215/224447117-b0b21ded-d90e-4bba-9025-c5d2c563810a.png"> <img width="200" alt="A list of sound options that can be selected." src="https://user-images.githubusercontent.com/21343215/224447121-3e51749d-13de-478a-8a53-e309d37bf2c7.png"> <img width="200" alt="Shows an icon for an ear with text 'Listening...'. Half circles can be seen on either side of the icon indicating a signal strength." src="https://user-images.githubusercontent.com/21343215/224595654-8c8ccd7e-ee1a-41d5-8eda-29c1cf4c90d4.png"> <img width="200" alt="A list of historical info showin detected sounds." src="https://user-images.githubusercontent.com/21343215/224595647-f9ec1b2c-4272-43d8-ad72-c5e6914db913.png"> 
 
 
 ## Introduction ##
