@@ -34,6 +34,8 @@ So the solution is to provide sound recognition through a trained model on sound
 
 Secondly, the user interface was designed based on the outcomes of the research that are referenced. The app will convey sound recognition through a visual representation by an icon and strength level. It will also provide a tactile response through haptics. Also based on the research, a user can adjust [multiple settings](#adjustable-settings) in the app so that it meets their needs. By having this information readily available and consumable through multiple senses, a hard of hearing person can use this information to ride safely in environments they might not be able to otherwise.
 
+A [demo video](https://github.com/alexanderboswell/safeRide/blob/main/demo/safe%20ride%20demo%20video.mov) can be found in this repository.
+
 ## Disability justice perspective ##
 
 ### Collective liberation ###
